@@ -1,13 +1,9 @@
 import React from 'react';
-import { Alert } from '../types';
+// Removed TypeScript type import
 import { AlertTriangle, X } from 'lucide-react';
 
-interface AlertBannerProps {
-  alert: Alert | null;
-  onDismiss: () => void;
-}
-
-export const AlertBanner: React.FC<AlertBannerProps> = ({ alert, onDismiss }) => {
+// Removed AlertBannerProps interface and React.FC generic annotation
+export const AlertBanner = ({ alert, onDismiss }) => {
   if (!alert) return null;
 
   const bgColors = {
