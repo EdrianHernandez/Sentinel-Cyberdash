@@ -1,13 +1,8 @@
 import React from 'react';
-import { SystemMetrics } from '../types';
+// Removed TypeScript type import
 
-interface GaugeProps {
-  label: string;
-  value: number;
-  color: string;
-}
-
-const Gauge: React.FC<GaugeProps> = ({ label, value, color }) => {
+// Removed GaugeProps interface and React.FC generic annotation
+const Gauge = ({ label, value, color }) => {
   const radius = 36;
   const stroke = 4;
   const normalizedRadius = radius - stroke * 2;
@@ -52,11 +47,8 @@ const Gauge: React.FC<GaugeProps> = ({ label, value, color }) => {
   );
 };
 
-interface SystemHealthGaugesProps {
-  metrics: SystemMetrics;
-}
-
-export const SystemHealthGauges: React.FC<SystemHealthGaugesProps> = ({ metrics }) => {
+// Removed SystemHealthGaugesProps interface and React.FC generic annotation
+export const SystemHealthGauges = ({ metrics }) => {
   return (
     <div className="flex items-center justify-around h-full px-4">
       <Gauge label="CPU LOAD" value={metrics.cpu} color={metrics.cpu > 80 ? '#ef4444' : '#22c55e'} />
