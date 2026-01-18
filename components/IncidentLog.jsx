@@ -1,15 +1,11 @@
 import React from 'react';
-import { Incident } from '../types';
+// Removed TypeScript type import
 import { Search, Terminal, AlertOctagon, AlertTriangle, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
-interface IncidentLogProps {
-  incidents: Incident[];
-  onAnalyze: (incident: Incident) => void;
-  apiKeyAvailable: boolean;
-}
-
-export const IncidentLog: React.FC<IncidentLogProps> = ({ incidents, onAnalyze, apiKeyAvailable }) => {
-  const getSeverityConfig = (severity: string) => {
+// Removed IncidentLogProps interface and React.FC generic annotation
+export const IncidentLog = ({ incidents, onAnalyze, apiKeyAvailable }) => {
+  // Removed explicit string type annotation for severity
+  const getSeverityConfig = (severity) => {
     switch(severity) {
       case 'critical': return {
         styles: 'bg-red-950/40 border-red-500/50 text-red-400 shadow-[0_0_10px_rgba(239,68,68,0.2)]',
