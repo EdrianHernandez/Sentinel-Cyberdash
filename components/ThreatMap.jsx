@@ -1,16 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 
-interface ThreatPoint {
-  id: number;
-  long: number;
-  lat: number;
-  intensity: number; // 0-1
-}
-
-export const ThreatMap: React.FC = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+// Removed ThreatPoint interface and React.FC generic annotation
+export const ThreatMap = () => {
+  const svgRef = useRef(null);
+  const wrapperRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   // Handle Resize
@@ -65,8 +59,9 @@ export const ThreatMap: React.FC = () => {
 
 
     // 2. Generate Random Threat Points
-    const generateThreats = (count: number): ThreatPoint[] => {
-      const threats: ThreatPoint[] = [];
+    // Removed type annotation for 'count' and return type
+    const generateThreats = (count) => {
+      const threats = [];
       for(let i=0; i<count; i++) {
         threats.push({
           id: i,
@@ -89,6 +84,7 @@ export const ThreatMap: React.FC = () => {
       .enter()
       .append("circle")
       .attr("class", "pulse")
+      // Removed non-null assertions (!)
       .attr("cx", d => projection([d.long, d.lat])?.[0] || 0)
       .attr("cy", d => projection([d.long, d.lat])?.[1] || 0)
       .attr("r", 2)
@@ -117,6 +113,7 @@ export const ThreatMap: React.FC = () => {
       .data(threats)
       .enter()
       .append("circle")
+      // Removed non-null assertions (!)
       .attr("cx", d => projection([d.long, d.lat])?.[0] || 0)
       .attr("cy", d => projection([d.long, d.lat])?.[1] || 0)
       .attr("r", 3)
