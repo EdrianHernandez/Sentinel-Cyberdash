@@ -1,13 +1,14 @@
 import { GoogleGenAI } from "@google/genai";
-import { Incident } from "../types";
+// Removed TypeScript type import
 
-let ai: GoogleGenAI | null = null;
+let ai = null;
 
 if (process.env.API_KEY) {
   ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 }
 
-export const analyzeThreat = async (incident: Incident): Promise<string> => {
+// Removed type annotations for 'incident' parameter and Promise return type
+export const analyzeThreat = async (incident) => {
   if (!ai) {
     throw new Error("API Key not found");
   }
