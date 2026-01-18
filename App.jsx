@@ -3,11 +3,11 @@ import { AlertBanner } from './components/AlertBanner';
 import { ThreatMap } from './components/ThreatMap';
 import { IncidentLog } from './components/IncidentLog';
 import { SystemHealthGauges } from './components/SystemHealthGauges';
-import { Incident, SystemMetrics, Alert } from './types';
+// Removed TypeScript type imports
 import { Loader2, ShieldCheck, Zap } from 'lucide-react';
 import { analyzeThreat } from './services/geminiService';
 
-const MOCK_INCIDENTS: Incident[] = [
+const MOCK_INCIDENTS = [
   { id: 'INC-2049', severity: 'critical', sourceIp: '192.168.45.12', target: 'Auth-Server-01', timestamp: '2023-10-27 14:02:11', type: 'Brute Force' },
   { id: 'INC-2048', severity: 'high', sourceIp: '45.22.19.112', target: 'DB-Cluster-04', timestamp: '2023-10-27 13:59:45', type: 'SQL Injection' },
   { id: 'INC-2047', severity: 'medium', sourceIp: '89.102.11.5', target: 'Gateway-East', timestamp: '2023-10-27 13:45:22', type: 'Port Scan' },
@@ -15,26 +15,27 @@ const MOCK_INCIDENTS: Incident[] = [
   { id: 'INC-2045', severity: 'critical', sourceIp: '201.44.12.99', target: 'Main-Frame-X', timestamp: '2023-10-27 13:15:00', type: 'DDoS' },
 ];
 
-const INITIAL_METRICS: SystemMetrics = {
+const INITIAL_METRICS = {
   cpu: 45,
   network: 62,
   firewall: 98,
 };
 
-const INITIAL_ALERT: Alert | null = {
+const INITIAL_ALERT = {
   id: 'ALT-001',
   level: 'critical',
   message: 'UNAUTHORIZED ACCESS DETECTED: SECTOR 7G',
 };
 
-const App: React.FC = () => {
-  const [incidents, setIncidents] = useState<Incident[]>(MOCK_INCIDENTS);
-  const [metrics, setMetrics] = useState<SystemMetrics>(INITIAL_METRICS);
-  const [activeAlert, setActiveAlert] = useState<Alert | null>(INITIAL_ALERT);
-  const [selectedIncident, setSelectedIncident] = useState<Incident | null>(null);
-  const [analysisResult, setAnalysisResult] = useState<string | null>(null);
+const App = () => {
+  // Removed generic type parameters from useState
+  const [incidents, setIncidents] = useState(MOCK_INCIDENTS);
+  const [metrics, setMetrics] = useState(INITIAL_METRICS);
+  const [activeAlert, setActiveAlert] = useState(INITIAL_ALERT);
+  const [selectedIncident, setSelectedIncident] = useState(null);
+  const [analysisResult, setAnalysisResult] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [apiKeyAvailable, setApiKeyAvailable] = useState<boolean>(false);
+  const [apiKeyAvailable, setApiKeyAvailable] = useState(false);
 
   useEffect(() => {
     // Check if API key is roughly available (not empty)
@@ -54,7 +55,8 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleAnalyze = async (incident: Incident) => {
+  // Removed type annotation for 'incident' parameter
+  const handleAnalyze = async (incident) => {
     if (!apiKeyAvailable) return;
     
     setSelectedIncident(incident);
